@@ -1,40 +1,24 @@
-import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+import React from 'react';
+import { Menubar } from 'primereact/menubar';
+import 'primeicons/primeicons.css';
 
 export default function NavBar() {
-  return (
-    <nav className='nav'>
-      <Link to='/' className='site-title'>
-        Weather Dashboard
-      </Link>
-      <ul>
-        <li>
-          <a href='/Forecast'>Forecast</a>
-        </li>
-        <li>
-          <a href='/Alerts'>Alerts</a>
-        </li>
-        <li>
-          <a href='/Data'>Data</a>
-        </li>
-        <li>
-          <a href='News'>News</a>
-        </li>
-      </ul>
-      <ul>
-        <CustomLink to='/Profile'>Profile</CustomLink>
-      </ul>
-    </nav>
-  );
-}
+  const items = [
+    {
+      label: 'Home',
+      icon: 'pi pi-home',
+      command: () => navigateTo('/'),
+    },
+    {
+      label: 'Profile',
+      icon: 'pi pi-user',
+      command: () => navigateTo('/Profile'),
+    },
+  ];
 
-function CustomLink({ to, children, ...props }) {
-  const resolvedPath = useResolvedPath(to);
-  const isActive = useMatch({ path: resolvedPath.pathname, end: true });
-  return (
-    <li classname={isActive ? 'active' : ''}>
-      <Link to={to} {...props}>
-        {children}
-      </Link>
-    </li>
-  );
+  const navigateTo = (path) => {
+    window.history.pushState(null, '', path);
+  };
+
+  return <Menubar model={items} />;
 }
