@@ -1,6 +1,6 @@
 import 'primeflex/primeflex.css';
 
-const gridLayout = () => {
+const Home = () => {
   return (
     <div class='grid'>
       <div class='col'>
@@ -27,4 +27,4 @@ const gridLayout = () => {
   );
 };
 
-export default gridLayout;
+export default Home;
