@@ -32,31 +32,35 @@ const chartOptions = {
   },
 };
 
+const marginStyle = {
+  margin: '0px 75px',
+};
+
 const Home = () => {
   return (
-    <div class='grid'>
-      <div class='col'>
+    <div class='grid' style={marginStyle}>
+      <div class='col-6'>
         <div class='text-center p-3 border-round-sm bg-primary font-bold'>
           <Card title='Bar Graph'>
             <Chart type='bar' data={chartData} options={chartOptions}></Chart>
           </Card>
         </div>
       </div>
-      <div class='col'>
+      <div class='col-6'>
         <div class='text-center p-3 border-round-sm bg-primary font-bold '>
           <Card title='Pie Chart'>
             <Chart type='pie' data={chartData} options={chartOptions}></Chart>
           </Card>
         </div>
       </div>
-      <div class='col'>
+      <div class='col-6'>
         <div class='text-center p-3 border-round-sm bg-primary font-bold '>
           <Card title='Line Graph'>
             <Chart type='line' data={chartData} options={chartOptions}></Chart>
           </Card>
         </div>
       </div>
-      <div class='col'>
+      <div class='col-6'>
         <div class='text-center p-3 border-round-sm bg-primary font-bold '>
           <Card title='Donut Chart'>
             <Chart
