@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 
-const temperature = require('backend/routes/temperature.js');
+const temperature = require('/Users/john.ngo/Projects/weatherDashboard/backend/routes/temperature.js');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -56,7 +56,7 @@ app.use(function (err, req, res, next) {
 app.use('/api', temperature);
 
 app.listen(port, () => {
-  console.log(`Serve listening on port ${port}`);
+  console.log(`Server listening on port ${port}`);
 });
 
 module.exports = app;
