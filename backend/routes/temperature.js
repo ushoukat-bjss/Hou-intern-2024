@@ -3,7 +3,8 @@ const fs = require('fs/promises');
 
 const router = express.Router();
 
-const temperatureDataFile = 'src/data.json';
+const temperatureDataFile =
+  '/Users/john.ngo/Projects/weatherDashboard/src/data.json';
 
 async function loadTemperatureData() {
   try {

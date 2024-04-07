@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 
-const temperature = require('/Users/john.ngo/Projects/weatherDashboard/backend/routes/temperature.js');
+var temperature = require('/Users/john.ngo/Projects/weatherDashboard/backend/routes/temperature.js');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -34,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/', temperature);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -52,8 +53,6 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-app.use('/api', temperature);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
