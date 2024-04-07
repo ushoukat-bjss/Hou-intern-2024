@@ -4,7 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+const port = process.env.PORT || 3000;
 
+const temperature = require('backend/routes/temperature.js');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -49,6 +51,12 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.use('/api', temperature);
+
+app.listen(port, () => {
+  console.log(`Serve listening on port ${port}`);
 });
 
 module.exports = app;
