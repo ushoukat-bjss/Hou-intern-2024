@@ -16,18 +16,7 @@ async function loadTemperatureData() {
   }
 }
 
-function getMonthlyAverageTemp(month, temperatureData) {
-  const monthData = temperatureData['Average Temperature in Houston'][month];
-  if (!monthData) {
-    return null;
-  }
-  const temperatures = monthData.data.map(
-    (item) => item.temperature_fahrenheit
-  );
-  return temperatures.reduce((acc, val) => acc + val, 0) / temperatures.length;
-}
-
-async function getAverageTempsOctMarch(temperatureData) {
+function getAllTemperaturesPerMonth(temperatureData) {
   const months = [
     'October',
     'November',
@@ -36,18 +25,27 @@ async function getAverageTempsOctMarch(temperatureData) {
     'February',
     'March',
   ];
-  const averageTemps = {};
+  const allTemperatures = {};
   for (const month of months) {
-    averageTemps[month] = getMonthlyAverageTemp(month, temperatureData);
+    const monthData = temperatureData['Average Temperature in Houston'][month];
+    console.log(monthData);
+    console.log(month);
+    if (!monthData) {
+      allTemperatures[month] = [];
+      continue;
+    }
+    allTemperatures[month] = monthData.data.map(
+      (item) => item.temperature_fahrenheit
+    );
   }
-  return averageTemps;
+  return allTemperatures;
 }
 
 router.get('/average-temperatures-houston', async (req, res) => {
   try {
     const temperatureData = await loadTemperatureData();
-    const averageTemps = await getAverageTempsOctMarch(temperatureData);
-    res.json(averageTemps);
+    const allTemps = await getAllTemperaturesPerMonth(temperatureData);
+    res.json(allTemps);
   } catch (error) {
     console.error('Error processing request:', error);
     res.status(500).send('Internal server error');
